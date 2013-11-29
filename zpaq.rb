@@ -16,13 +16,13 @@ class Zpaq < Formula
   end
   def install
     ENV.j1  # if your formula's build system can't parallelize
-    mkpath "#{prefix}/share/src"
-    cp Dir["*"],"#{prefix}/share/src"
+    mkpath "#{share}/src"
+    cp Dir["*"],"#{share}/src"
     system "make", "-f","Makefile.mac"
     system "pod2man","zpaq.1.pod","zpaq.1"
     system "pod2man","libzpaq.3.pod","libzpaq.3"
     bin.install "zpaq"
-    bin.install "zpaqmake"
+    bin.install "zpipe"
     lib.install "libzpaq.o"
     include.install "libzpaq.h"
     man1.install "zpaq.1"
@@ -35,18 +35,28 @@ class Zpaq < Formula
 end
 
 __END__
-diff --git a/zpaqmake b/zpaqmake
-index e69de29..864b50d 100755
---- a/zpaqmake
-+++ b/zpaqmake
-@@ -0,0 +1,9 @@
-+#!/bin/bash
-+# This script is called by ZPAQ to compile optimized versions. It is
-+# expected to compile %1.cpp to %1.exe with -DOPT -DNDEBUG,
-+# #include <zpaq.h> and link it to zpaq.cpp or zpaq.o. These files can
-+# be anywhere, but this script is expected to find them.
-+# The following assumes zpaq.cpp and zpaq.h are in the homebrew share/src
-+# and temporary files go in %TEMP%. Adjust accordingly.
-+g++ -Wall -O1 -DNDEBUG -Dunix -m64 -fopenmp -DOPT $1.cpp -IHOMEBREW_PREFIX/include HOMEBREW_PREFIX/Cellar/zpaq/6.20/share/src/zpaq.cpp -o $1
+diff --git a/Makefile.mac b/Makefile.mac
+index 8b7e749..2dac15a 100644
+--- a/Makefile.mac
++++ b/Makefile.mac
+@@ -1,13 +1,16 @@
+-OBJECTS=zpaq.o libzpaq.o divsufsort.o
++OBJECTS=libzpaq.o divsufsort.o
+ 
+-BINARY=zpaq
++BINARY=zpaq zpipe
+ 
+ CXXFLAGS=-Wall -O1 -DNDEBUG -Dunix -m64 -fopenmp
+ CXX=g++
+ 
+ all: $(BINARY)
+ 
+-$(BINARY): $(OBJECTS)
++zpaq: zpaq.o $(OBJECTS)
++	g++ -o $@ $^
 +
++zpipe: zpipe.o $(OBJECTS)
+ 	g++ -o $@ $^
+ 
+ clean:
 
