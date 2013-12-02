@@ -39,7 +39,7 @@ class Securecoin < Formula
   end
 
   def patches
-    DATA
+#    DATA
   end
 
   test do
@@ -56,75 +56,3 @@ class Securecoin < Formula
 end
 
 __END__
-diff --git a/securecoin-qt.pro b/securecoin-qt.pro
-index 88d03e6..cdb7e95 100755
---- a/securecoin-qt.pro
-+++ b/securecoin-qt.pro
-@@ -103,14 +103,14 @@ INCLUDEPATH += src/leveldb/include src/leveldb/helpers
- LIBS += $$PWD/src/leveldb/libleveldb.a $$PWD/src/leveldb/libmemenv.a
- !win32 {
-     # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
--    # genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
-+    genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
- } else {
-     # make an educated guess about what the ranlib command is called
-     isEmpty(QMAKE_RANLIB) {
-         QMAKE_RANLIB = $$replace(QMAKE_STRIP, strip, ranlib)
-     }
-     LIBS += -lshlwapi
--    # genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
-+    genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
- }
- genleveldb.target = $$PWD/src/leveldb/libleveldb.a
- genleveldb.depends = FORCE
-
-diff --git a/share/qt/Info.plist b/share/qt/Info.plist
-index 2312094..378b1c2 100755
---- a/share/qt/Info.plist
-+++ b/share/qt/Info.plist
-@@ -15,19 +15,19 @@
- 	<key>CFBundleSignature</key>
- 	<string>????</string>
- 	<key>CFBundleExecutable</key>
--	<string>Bitcoin-Qt</string>
-+	<string>Securecoin-Qt</string>
- 	<key>CFBundleIdentifier</key>
--	<string>org.bitcoinfoundation.Bitcoin-Qt</string>
-+	<string>org.securecoin.Securecoin-Qt</string>
-         <key>CFBundleURLTypes</key>
-         <array>
-           <dict>
-             <key>CFBundleTypeRole</key>
-             <string>Editor</string>
-             <key>CFBundleURLName</key>
--            <string>org.bitcoinfoundation.BitcoinPayment</string>
-+            <string>org.securecoin.SecurecoinPayment</string>
-             <key>CFBundleURLSchemes</key>
-             <array>
--              <string>bitcoin</string>
-+              <string>securecoin</string>
-             </array>
-           </dict>
-         </array>
-diff --git a/src/makefile.osx b/src/makefile.osx
-index 8caac87..1f735a6 100755
---- a/src/makefile.osx
-+++ b/src/makefile.osx
-@@ -7,6 +7,7 @@
- # Originally by Laszlo Hanyecz (solar@heliacal.net)
- 
- CXX=llvm-g++
-+CC=llvm-gcc
- DEPSDIR=/opt/local
- 
- INCLUDEPATHS= \
-@@ -157,7 +158,7 @@ obj/%.o: %.cpp
- 	  rm -f $(@:%.o=%.d)
- 
- obj/%.o: %.c
--	$(CXX) -c $(CFLAGS) -fpermissive -MMD -MF $(@:%.o=%.d) -o $@ $<
-+	$(CC) -c $(CFLAGS) -fpermissive -MMD -MF $(@:%.o=%.d) -o $@ $<
- 	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
- 	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
- 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
-
