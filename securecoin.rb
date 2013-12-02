@@ -2,10 +2,10 @@ require 'formula'
 
 class Securecoin < Formula
   homepage ''
-  url 'https://github.com/lokkju/Securecoin.git', :revision => '77c8d6c1990f5098cd426fd4a2a9238572d76346'
+  url 'https://github.com/lokkju/Securecoin/archive/0.8.3-beta-1.tar.gz'
   head 'https://github.com/lokkju/Securecoin.git'
   version '0.8.3-beta1'
-  sha1 ''
+  sha1 '3554adda1812558e86ff1a95656ee7b51de58675'
 
   depends_on :x11 => :recommended 
   depends_on 'boost'
@@ -35,6 +35,9 @@ class Securecoin < Formula
         brew linkapps
     or:
         ln -s #{prefix}/Securecoin-qt.app /Applications
+
+    You can also bootstrap your peers.dat and blockchain via the bootstrap.zip file available for this release:
+    https://github.com/lokkju/Securecoin/releases/download/#{version}/bootstrap.zip
     EOS
   end
 
