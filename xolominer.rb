@@ -7,6 +7,7 @@ class Xolominer < Formula
   version '0.8.RC1-1'
   sha1 ''
 
+  depends_on 'leveldb'
   depends_on 'boost'
   depends_on 'berkeley-db4'
   depends_on 'openssl'
