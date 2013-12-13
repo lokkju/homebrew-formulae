@@ -12,6 +12,7 @@ class Xolominer < Formula
   depends_on 'berkeley-db4'
   depends_on 'openssl'
   depends_on 'miniupnpc'
+  depends_on 'gmp'
   
   def install
 
