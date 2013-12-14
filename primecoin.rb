@@ -5,16 +5,16 @@ class Primecoin < Formula
   url 'https://github.com/primecoin/primecoin/archive/v0.1.2xpm.tar.gz'
   head 'https://github.com/primecoin/primecoin.git'
   version '0.1.2xpm'
-  sha1 ''
+  sha1 'f0745f83b560fe3748d9dbcc4f55ea97acc58a8b'
 
-  depends_on :x11 => :recommended 
+  depends_on :x11 => :recommended
   depends_on 'boost'
   depends_on 'berkeley-db4'
   depends_on 'openssl'
   depends_on 'miniupnpc'
   depends_on 'qrencode' => :recommended
   depends_on 'qt' => :recommended
-  
+
   def install
     # ENV.j1  # if your formula's build system can't parallelize
 
@@ -84,4 +84,3 @@ index 2312094..8b5e0bf 100644
              </array>
            </dict>
          </array>
-
