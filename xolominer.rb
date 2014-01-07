@@ -2,9 +2,9 @@ require 'formula'
 
 class Xolominer < Formula
   homepage 'http://primecoin.org/'
-  url 'https://github.com/lokkju/primecoin.git', :revision => '7d767c9bc9bde7c94a58bc8b8c3a98d36fd35293'
+  url 'https://github.com/lokkju/primecoin.git', :revision => 'e71d317a5ba9b587f6f37c8e2f34458ae486dd65'
   head 'https://github.com/lokkju/primecoin.git'
-  version '0.8.RC1-1'
+  version '0.8.RC1-2'
   sha1 ''
 
   depends_on 'leveldb'
