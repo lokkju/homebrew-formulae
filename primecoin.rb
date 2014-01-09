@@ -35,11 +35,11 @@ class Primecoin < Formula
         brew linkapps
     or:
         ln -s #{prefix}/Primecoin-qt.app /Applications
-    EOS
 
     Bug reports and suggestions for this homebrew formula may be filed at: https://github.com/lokkju/homebrew-formulae/issues/
 
     If you find this formula useful, consider sending a tip to the formula author at XPM: AYhpx394ZmurA93hvFoJigBC8pezjAt1ww
+    EOS
   end
 
   def patches

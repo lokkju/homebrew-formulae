@@ -32,6 +32,7 @@ class Xolominer < Formula
     Bug reports and suggestions for this branch of the xolominer project may be filed at: https://github.com/lokkju/primecoin/issues/
 
     If you find this formula useful, consider sending a tip to the formula author at XPM: AN7g5PqQdYJhrSNfG5soHVX7xkzzPsB4HL
+    EOS
   end
 
   test do
