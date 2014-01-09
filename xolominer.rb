@@ -27,6 +27,13 @@ class Xolominer < Formula
 #    DATA
   end
 
+  def caveats; <<-EOS.undent
+    Bug reports and suggestions for this homebrew formula may be filed at: https://github.com/lokkju/homebrew-formulae/issues/
+    Bug reports and suggestions for this branch of the xolominer project may be filed at: https://github.com/lokkju/primecoin/issues/
+
+    If you find this formula useful, consider sending a tip to the formula author at XPM: AN7g5PqQdYJhrSNfG5soHVX7xkzzPsB4HL
+  end
+
   test do
     # `test do` will create, run in and delete a temporary directory.
     #
