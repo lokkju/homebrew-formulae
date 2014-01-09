@@ -2,10 +2,10 @@ require 'formula'
 
 class Primecoin < Formula
   homepage 'http://primecoin.org/'
-  url 'https://github.com/primecoin/primecoin/archive/v0.1.2xpm.tar.gz'
+  url 'https://github.com/primecoin/primecoin/archive/v0.8.6.tar.gz'
   head 'https://github.com/primecoin/primecoin.git'
-  version '0.1.2xpm'
-  sha1 'f0745f83b560fe3748d9dbcc4f55ea97acc58a8b'
+  version '0.8.6'
+  sha1 '220cc2e3694d8378ad9af3721b1e2c8d282bad84'
 
   depends_on :x11 => :recommended
   depends_on 'boost'
@@ -35,6 +35,8 @@ class Primecoin < Formula
         brew linkapps
     or:
         ln -s #{prefix}/Primecoin-qt.app /Applications
+
+    If you appreciate this homebrew formula, XPM tips are gladly accepted at 
     EOS
   end
 
@@ -84,3 +86,38 @@ index 2312094..8b5e0bf 100644
              </array>
            </dict>
          </array>
+diff --git a/bitcoin-qt.pro b/bitcoin-qt.pro
+index 69c2478..99ddf4b 100644
+--- a/bitcoin-qt.pro
++++ b/bitcoin-qt.pro
+@@ -1,6 +1,6 @@
+ TEMPLATE = app
+ TARGET = bitcoin-qt
+-macx:TARGET = "Bitcoin-Qt"
++macx:TARGET = "Primecoin-Qt"
+ VERSION = 0.8.6
+ INCLUDEPATH += src src/json src/qt
+ QT += network
+diff --git a/src/makefile.osx b/src/makefile.osx
+index 50279fd..b2ec8e0 100644
+--- a/src/makefile.osx
++++ b/src/makefile.osx
+@@ -120,7 +120,7 @@ ifneq (${USE_IPV6}, -)
+ 	DEFS += -DUSE_IPV6=$(USE_IPV6)
+ endif
+ 
+-all: bitcoind
++all: primecoind
+ 
+ test check: test_bitcoin FORCE
+ 	./test_bitcoin
+@@ -150,7 +150,7 @@ obj/%.o: %.cpp
+ 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
+ 	  rm -f $(@:%.o=%.d)
+ 
+-bitcoind: $(OBJS:obj/%=obj/%)
++primecoind: $(OBJS:obj/%=obj/%)
+ 	$(CXX) $(CFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
+ 
+ TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
+
